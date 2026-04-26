@@ -1,4 +1,5 @@
 import httpx
+import asyncio
 
 sites = [
     "https://www.facebook.com/",
@@ -9,14 +10,15 @@ sites = [
     "https://www.tiktok.com/@"
 ]
 
-def checknickname():
+async def checknickname():
     nickname = input("Write your nickname: ")
     found = []
+    header = {"User-Agent": "Mozilla/5.0"}
 
     for site in sites:
         url = site + nickname
         try:
-            r = httpx.get(url, timeout=5)
+            r = httpx.get(url, timeout=5, headers=header)
 
             if r.status_code == 200:
                 print(f"[+] Found: {url}")
@@ -29,5 +31,5 @@ def checknickname():
 
     return found
 
-result = checknickname()
+result = asyncio.run(checknickname())
 print("\nSummary:", result)
