@@ -1,16 +1,16 @@
 import httpx
-import asyncio
 
-sites = [
+
+sites = {
     "https://www.facebook.com/",
     "https://www.instagram.com/",
     "https://www.twitter.com/",
     "https://www.linkedin.com/in/",
     "https://www.youtube.com/@",
     "https://www.tiktok.com/@"
-]
+}
 
-async def checknickname():
+def checknickname():
     nickname = input("Write your nickname: ")
     found = []
     header = {"User-Agent": "Mozilla/5.0"}
@@ -30,6 +30,3 @@ async def checknickname():
             print(f"[!] Error connecting to {site}")
 
     return found
-
-result = asyncio.run(checknickname())
-print("\nSummary:", result)
