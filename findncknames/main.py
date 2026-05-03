@@ -1,16 +1,27 @@
-import whereisnickname
-import findnciknameinnet.nicknamebio as nicknamebio
 from colorama import Fore, init
+
+import whereisnickname
+import nicknamebio as nicknamebio
 
 init()
 
-if __name__ == "__main__":
+def main():
     while True:
-        userinput = input(Fore.GREEN + "> ")
-        match userinput:
-            case "quit":
+        userinput = input(Fore.GREEN + "> ").strip()
+
+        match userinput.lower():
+            case "quit" | "exit" | "x":
+                print(Fore.RED + "Bye 👋")
                 break
-            case "wherenickname":
+
+            case "whereisnickname":
                 whereisnickname.checknickname()
+
             case "nicknamebio":
                 nicknamebio.nicknamebio()
+
+            case _:
+                print(Fore.YELLOW + "Unknown command")
+
+if __name__ == "__main__":
+    main()
