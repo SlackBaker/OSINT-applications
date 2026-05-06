@@ -11,7 +11,6 @@ def main():
 
         match userinput.lower():
             case "quit" | "exit" | "x":
-                print(Fore.RED + "Bye 👋")
                 break
 
             case "whereisnickname":
