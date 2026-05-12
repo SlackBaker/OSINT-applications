@@ -9,7 +9,12 @@ sites = {
     "https://www.youtube.com/@",
     "https://www.tiktok.com/@",
     "https://www.reddit.com/",
-    "https://www.github.io/"
+    "https://www.github.io/",
+    "https://www.pinterest.com/",
+    "https://www.threads.com/",
+    "https://www.snapchat.com/",
+    "https://www.steampowered.com/",
+    "https://www.xbox.com/"
 }
 
 def checknickname():

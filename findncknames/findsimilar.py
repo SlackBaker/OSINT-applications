@@ -1,29 +1,43 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-import asyncio
-import time
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-sites = [
-    "https://www.facebook.com",
-    "https://www.twitter.com",
-    "https://www.instagram.com",
-    "https://www.youtube.com",
-    "https://www.linkedin.com",
-    "https://www.reddit.com",
-    "https://www.pinterest.com",
-]
+sites = {
+    "github": {
+        "url": "https://github.com/search?q={}&type=users",
+    },
 
-async def check():
-    nickname = str(input("write nickname:"))
-    for site in sites:
-        driver = webdriver.Chrome()
-        driver.get(site)
+    "reddit": {
+        "url": "https://www.reddit.com/search/?q={}",
+    },
 
-        time.sleep(5)
+    "youtube": {
+        "url": "https://www.youtube.com/results?search_query={}",
+    }
+}
+def findsimilar():
+    nickname = input("Nickname: ")
 
-        search_box = driver.find_element(By.XPATH, "//input[@placeholder='Search Facebook']")
-        search_box.send_keys(nickname)
-        search_box.send_keys(Keys.RETURN)
+    driver = webdriver.Chrome()
 
-        time.sleep(3)
+    for name, site in sites.items():
+
+        url = site["url"].format(nickname)
+
+        print(f"[+] Searching in {name}")
+
+        driver.get(url)
+
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.TAG_NAME, "body"))
+        )
+
+        if nickname.lower() in driver.page_source.lower():
+            print(f"[FOUND] {name}")
+
+        else:
+            print(f"[NOT FOUND] {name}")
+
+    driver.quit()

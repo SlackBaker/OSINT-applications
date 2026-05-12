@@ -2,6 +2,7 @@ from colorama import Fore, init
 
 import whereisnickname
 import nicknamebio as nicknamebio
+import findsimilar
 
 init()
 
@@ -18,6 +19,9 @@ def main():
 
             case "nicknamebio":
                 nicknamebio.nicknamebio()
+
+            case "findsimilar":
+                findsimilar.findsimilar()
 
             case _:
                 print(Fore.YELLOW + "Unknown command")
